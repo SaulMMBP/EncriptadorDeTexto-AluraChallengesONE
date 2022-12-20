@@ -165,12 +165,23 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .view p {
-    max-height: 320px;
+    max-height: 80%;
     padding: 1rem 0;
     font-size: 1.5rem;
     line-height: 120%;
     color: #495057;
     overflow-y: scroll;
+}
+
+.view p::-webkit-scrollbar {
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 6px;
+    border-radius: 5px;
+}
+
+.view p::-webkit-scrollbar-thumb {
+    background-color: rgba(10, 56, 113, 0.9);
+    border-radius: 5px;
 }
 
 .view button {
@@ -216,6 +227,10 @@ footer p {
 
     .view-section .image-wrap {
         display: none !important;
+    }
+
+    .view p {
+        max-height: 320px;
     }
 }
 
