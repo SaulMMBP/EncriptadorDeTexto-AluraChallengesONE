@@ -5,6 +5,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+html {
+    font-size: 100%;
+}
+
 body {
     background-color: #D8DFE8;
 }
@@ -33,7 +37,7 @@ main {
 
 textarea {
     width: 100%;
-    height: 80%;
+    height: 100%;
     resize: none;
     border: none;
     background: none;
@@ -111,7 +115,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .input-section button {
-    width: 40%;
+    width: 50%;
 }
 
 /* ======== View Section ======== */
@@ -157,12 +161,16 @@ textarea::-webkit-scrollbar-thumb {
     height: 100%;
     flex-direction: column;
     justify-content: space-between;
+    gap: 1rem;
 }
 
 .view p {
+    max-height: 320px;
+    padding: 1rem 0;
     font-size: 1.5rem;
     line-height: 120%;
     color: #495057;
+    overflow-y: scroll;
 }
 
 .view button {
@@ -178,5 +186,61 @@ footer p {
     color: #0A3871;
 }
 
+/* ==== Tablet responsive ==== */
+
+@media screen and (max-width: 940px) {
+    main {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .input-section {
+        width: 100%;
+        height: 90%;
+    }
+
+    textarea {
+        padding: 2rem 0;
+    }
+
+    .actions {
+        width: 100%;
+    }
+
+    .view-section {
+        width: 100%;
+        height: auto;
+        padding: 2rem;
+        max-height: 50%;
+    }
+
+    .view-section .image-wrap {
+        display: none !important;
+    }
+}
+
+/* ==== Mobil responsive ==== */
+
+@media screen and (max-width: 540px) {
+    html {
+        font-size: 75%;
+    }
+
+    header {
+        padding: 1rem;
+    }
+
+    header img {
+        width: 7%;
+    }
+
+    main {
+        padding: 2rem 1rem;
+    }
+
+    .view-section p {
+        padding: 1rem 0;
+    }
+}
 
 
