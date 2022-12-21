@@ -9,43 +9,12 @@ function validacion(frase) {
     /* Expresión regular para encontrar mayúsculas y carácteres con acento */
     let regex = /[A-ZÀ-ú]/;
 
-    if(regex.test(frase)) {
-        alert("Escribe solo con minúsculas y sin acentos por favor");
-        return false;
-    } else if(frase == '') {
-        alert("No hay ningún mensaje escrito aún, ingresa el texto que deseas encriptar por favor");
-        return false
-    } else {
-        return true
-    }
+    return (!regex.test(frase) && frase != '');
 }
 
 
 function encriptar(frase) {
-
-    /* ======== Método 1 de encriptación ======== */
-    // /* Dividir la frase en un arreglo de carácteres */
-    // let newFrase = frase.split('');
-    // /* Cambiamos los carácteres por las claves de encriptación respecticas y unimos el arreglo en un string con join*/
-    // newFrase = newFrase.map((letra) => {
-    //     switch (letra) {
-    //         case 'e':
-    //             return 'enter';
-    //         case 'i':
-    //             return 'imes';
-    //         case 'a':
-    //             return 'ai';
-    //         case 'o':
-    //             return 'ober';
-    //         case 'u':
-    //             return 'ufat';
-    //         default:
-    //             return letra;
-    //     }
-    // }).join('');
-    // ===========================================
-
-    /* ======== Método 2 de encriptación ======== */
+    /* Remplazamos todas las vocales por las claves de encriptación */
     let newFrase = frase.replace(/e/g, 'enter')
         .replace(/i/g, 'imes')
         .replace(/a/g, 'ai')
@@ -58,6 +27,7 @@ function encriptar(frase) {
 
 
 function desencriptar(frase) {
+    /* Remplazamos las letras encriptadas por sus respectivas vocales*/
     let newFrase = frase.replace(/enter/g, 'e')
         .replace(/imes/g, 'i')
         .replace(/ai/g, 'a')
@@ -74,11 +44,13 @@ function mostrarEncriptado() {
     let frase = document.getElementById("input").value;
 
     if(validacion(frase)) {
-        /* Mostramos la etiqueta con el contenido del mensaje */
+        /* Mostramos el elemento html con el contenido del mensaje */
         showView(frase);
 
         /* Agregamos la frase encriptada al elemento html */
         document.getElementById("message").innerHTML = encriptar(frase);
+    } else {
+        alert("Intente de nuevo, puede que su mensaje esté vacío o contenga mayúsculas y/o acentos, evítelos por favor.");
     }
 }
 
@@ -88,10 +60,26 @@ function mostrarDesencriptado() {
     let frase = document.getElementById("input").value;
 
     if(validacion(frase)) {
-        /* Mostramos la etiqueta con el contenido del mensaje */
+        /* Mostramos el elemento html con el contenido del mensaje */
         showView(frase);
         
         /* Agregamos la frase desencriptada al elemento html */
         document.getElementById("message").innerHTML = desencriptar(frase);
+    } else {
+        alert("Intente de nuevo, puede que su mensaje esté vacío o contenga mayúsculas y/o acentos, evítelos por favor.");
     }
+}
+
+
+function copiar() {
+    /* Obtenemos el texto a copiar */
+    let text = document.getElementById("message").innerHTML;
+
+    /* Lo copiamos al portapapeles */
+    navigator.clipboard.writeText(text);
+
+    /* Lanzamos alerta de que el texto fue copiado */
+    let copyAlert = document.getElementById("copy-alert");
+    copyAlert.classList.add("copy");
+    setTimeout(() => copyAlert.classList.remove("copy"), 1500);
 }
