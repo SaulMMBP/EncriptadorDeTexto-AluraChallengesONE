@@ -26,20 +26,20 @@
 
     <main>
         <section class="input-section">
-            <textarea placeholder="Ingrese el texto aquí"></textarea>
+            <textarea id="input" placeholder="Ingrese el texto aquí"></textarea>
 
             <div class="actions">
-                <p class="info-text"><span>&#33;</span> Solo letras minúsculas y sin acentos</p>
+                <p class="info-text"><span>!</span> Solo letras minúsculas y sin acentos</p>
 
                 <div class="buttons">
-                    <button class="btn fill">Encriptar</button>
-                    <button class="btn no-fill">Desencriptar</button>
+                    <button class="btn fill" onclick="mostrarEncriptado()">Encriptar</button>
+                    <button class="btn no-fill" onclick="mostrarDesencriptado()">Desencriptar</button>
                 </div>
             </div>
         </section>
 
         <section class="view-section">
-            <div class="no-text-message hidden">
+            <div id="no-text-message" class="no-text-message">
                 <div class="image-wrap">
                     <img src="./resources/images/Muñeco.svg" alt="Ningún mensaje fue encontrado">
                 </div>
@@ -47,13 +47,8 @@
                 <p>Ingresa el texto que desees encriptar o desencriptar.</p>
             </div>
 
-            <div class="view">
-                <p>Enim est deserunt fugiat magna id labore enim pariatur. Velit id pariatur ex qui voluptate ex labore culpa. 
-                    Velit elit voluptate deserunt cupidatat ullamco. Aute cillum dolor id velit laboris occaecat eu. 
-                    Fugiat mollit deserunt qui id reprehenderit laboris do et ipsum Lorem. Esse nulla dolor nostrud incididunt ex.
-                    Enim est deserunt fugiat magna id labore enim pariatur. Velit id pariatur ex qui voluptate ex labore culpa. 
-                    Velit elit voluptate deserunt cupidatat ullamco. Aute cillum dolor id velit laboris occaecat eu. 
-                    Fugiat mollit deserunt qui id reprehenderit laboris do et ipsum Lorem. Esse nulla dolor nostrud incididunt ex.</p>
+            <div id="view" class="view hidden">
+                <p id="message"></p>
 
                 <button class="btn no-fill">Copiar</button>
             </div>
@@ -64,4 +59,5 @@
         <p>© 2022 Saul Malagon Martinez</p>
     </footer>
 </body>
+<script src="./resources/js/script.js"></script>
 </html>
