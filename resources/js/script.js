@@ -164,7 +164,6 @@ function closeAlert() {
 function showStars() {
     let body = document.getElementById("body");
     let height = window.innerHeight;
-    console.log(height);
 
     /* Creamos un lienzo para el fondo */
     body.insertAdjacentHTML('beforeend', '<div id="bg"></div>');
