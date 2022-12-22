@@ -83,3 +83,30 @@ function copiar() {
     copyAlert.classList.add("copy");
     setTimeout(() => copyAlert.classList.remove("copy"), 1500);
 }
+
+
+/* ============ Funciones para el background ============ */
+function showStars() {
+
+    let bg = document.getElementById("bg");
+ 
+    /* Creamos estrellas random cada 700ms */
+    setInterval(() => {
+        /* Posición y tamaño random */
+        let x = Math.round(Math.random() * (90 - 10) + 10);
+        let y = Math.round(Math.random() * (90 - 10) + 10);
+        let size = Math.round(Math.random() * (3 - 1) + 1);
+
+        /* Agregamos las estrellas con los estilos random */
+        bg.insertAdjacentHTML('beforeend',
+            `<span id="star" class="star" style="
+                top: ` + y + `%; 
+                left: ` + x + `%; 
+                width: ` + size + `px; 
+                height: ` + size + `px;">
+            </span>`);
+        
+        /* Eliminamos las estrellas después de 50s */
+        setTimeout(() => bg.removeChild(bg.firstChild), 50000);
+    }, 700);
+}
