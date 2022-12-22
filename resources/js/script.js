@@ -2,7 +2,7 @@
 function prepareSpace(frase) {
     /* Insertamos textarea con el mensaje encriptado/desencriptado y boton de copiar */
     document.getElementById("view-section").innerHTML = `
-        <textarea id="output" class="output" rows="8" readonly></textarea>
+        <textarea id="output" class="output" readonly></textarea>
         <button class="btn" onclick="copiar()">Copiar</button>
     `;
 }
