@@ -17,8 +17,7 @@
     <title>EncriptaONE</title>
 </head>
 
-<body onload="showStars()">
-    <div id="bg" class="bg"></div>
+<body id="body" onload="showStars()">
     <header>
         <h1>
             <img src="./resources/images/log.svg" alt="logo de alura">
@@ -27,39 +26,45 @@
 
     <main>
         <section class="input-section">
-            <textarea id="input" placeholder="Ingrese el texto aquí"></textarea>
+            <div class="input-wrap">
+                <textarea id="input" class="input" rows="8" placeholder="Ingrese el texto aquí"></textarea>
+
+                <div>
+                    <button class="icon btn-small" onclick="limpiar()"><img src="./resources/images/x-circle-fill.svg" alt="limpiar input"></button>
+                </div>
+            </div>
 
             <div class="actions">
-                <p class="info-text"><span class="icon">!</span> Solo letras minúsculas y sin acentos</p>
+                <p class="info-text"><span class="icon-small">
+                    <img src="./resources/images/exclamation-circle-fill.svg" alt="signo de exclamación">
+                </span> Solo letras minúsculas y sin acentos</p>
 
-                <div class="buttons">
-                    <button class="btn fill" onclick="mostrarEncriptado()">Encriptar</button>
+                <div id="buttons" class="buttons">
+                    <button class="btn" onclick="mostrarEncriptado()">Encriptar</button>
                     <button class="btn" onclick="mostrarDesencriptado()">Desencriptar</button>
                 </div>
             </div>
         </section>
 
-        <section class="view-section">
-            <div id="no-text-message" class="no-text-message">
-                <div class="image-wrap">
-                    <img src="./resources/images/Muñeco.svg" alt="Ningún mensaje fue encontrado">
-                </div>
-                <h2>Ningún mensaje fue encontrado</h2>
-                <p>Ingresa el texto que desees encriptar o desencriptar.</p>
+        <section id="view-section" class="view-section">
+            <div class="image-wrap">
+                <img src="./resources/images/Muñeco.svg" alt="Ningún mensaje fue encontrado">
             </div>
-
-            <div id="view" class="view hidden">
-                <p id="message"></p>
-
-                <span id="copy-alert" class="copy-alert">Texto Copiado</span>
-
-                <button class="btn" onclick="copiar()">Copiar</button>
-            </div>
+            <h2>Ningún mensaje fue encontrado</h2>
+            <p>Ingresa el texto que desees encriptar o desencriptar.</p>
         </section>
     </main>
-
+    
     <footer>
         <p>Creado por Saul Malagon Martinez</p>
+        <div class="icon">
+            <a href="https://github.com/SaulMMBP/EncriptadorDeTexto-AluraChallengesONE">
+                <img src="./resources/images/github.svg" alt="github link"></a>
+        </div>
+        <div class="icon">
+            <a href="https://www.linkedin.com/in/saul-malagon-martinez-dev/">
+                <img src="./resources/images/linkedin.svg" alt="linkedin link"></a>
+        </div>
     </footer>
 </body>
 <script src="./resources/js/script.js"></script>

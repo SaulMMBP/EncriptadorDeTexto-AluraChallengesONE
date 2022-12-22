@@ -1,17 +1,17 @@
-function showView(frase) {
-    /* Mostrar div con el mensaje y ocultar placeholder*/
-    document.getElementById("no-text-message").classList.add("hidden");
-    document.getElementById("view").classList.remove("hidden");
+/* ============ Funciones de Encriptación/Desencriptación ============ */
+function prepareSpace(frase) {
+    /* Insertamos textarea con el mensaje encriptado/desencriptado y boton de copiar */
+    document.getElementById("view-section").innerHTML = `
+        <textarea id="output" class="output" rows="8" readonly></textarea>
+        <button class="btn" onclick="copiar()">Copiar</button>
+    `;
 }
-
 
 function validacion(frase) {
     /* Expresión regular para encontrar mayúsculas y carácteres con acento */
     let regex = /[A-ZÀ-ú]/;
-
     return (!regex.test(frase) && frase != '');
 }
-
 
 function encriptar(frase) {
     /* Remplazamos todas las vocales por las claves de encriptación */
@@ -25,7 +25,6 @@ function encriptar(frase) {
     return newFrase;
 }
 
-
 function desencriptar(frase) {
     /* Remplazamos las letras encriptadas por sus respectivas vocales*/
     let newFrase = frase.replace(/enter/g, 'e')
@@ -38,22 +37,20 @@ function desencriptar(frase) {
     return newFrase;
 }
 
-
 function mostrarEncriptado() {
     /* Obtenemos el contenido de Textarea */
     let frase = document.getElementById("input").value;
 
     if(validacion(frase)) {
         /* Mostramos el elemento html con el contenido del mensaje */
-        showView(frase);
+        prepareSpace(frase);
 
         /* Agregamos la frase encriptada al elemento html */
-        document.getElementById("message").innerHTML = encriptar(frase);
+        document.getElementById("output").value = encriptar(frase);
     } else {
-        alert("Intente de nuevo, puede que su mensaje esté vacío o contenga mayúsculas y/o acentos, evítelos por favor.");
+        customAlert(30, 'none', 'white', 'Entrada incorrecta', 'Parece que su mensaje esté vacío o tal vez contiene mayúsculas y/o acentos, evítelos por favor.', true);
     }
 }
-
 
 function mostrarDesencriptado() {
     /* Obtenemos el contenido de Textarea */
@@ -61,52 +58,145 @@ function mostrarDesencriptado() {
 
     if(validacion(frase)) {
         /* Mostramos el elemento html con el contenido del mensaje */
-        showView(frase);
+        prepareSpace(frase);
         
         /* Agregamos la frase desencriptada al elemento html */
-        document.getElementById("message").innerHTML = desencriptar(frase);
+        document.getElementById("output").value = desencriptar(frase);
     } else {
-        alert("Intente de nuevo, puede que su mensaje esté vacío o contenga mayúsculas y/o acentos, evítelos por favor.");
+        customAlert(30, 'none', 'white', 'Entrada incorrecta', 'Parece que su mensaje esté vacío o tal vez contiene mayúsculas y/o acentos, evítelos por favor.', true);
     }
 }
 
 
+/* ============ Funciones de copiar/pegar/borrar ============ */
 function copiar() {
     /* Obtenemos el texto a copiar */
-    let text = document.getElementById("message").innerHTML;
+    let copiedText = document.getElementById("output").value;
 
     /* Lo copiamos al portapapeles */
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(copiedText);
 
-    /* Lanzamos alerta de que el texto fue copiado */
-    let copyAlert = document.getElementById("copy-alert");
-    copyAlert.classList.add("copy");
-    setTimeout(() => copyAlert.classList.remove("copy"), 1500);
+    /* Mostramos alerta de texto copiado */
+    copyAlert();
+}
+
+function limpiar() {
+    /* Seteamos el valor del input a '' */
+    document.getElementById("input").value = '';
+}
+
+
+/* ============ Funciones de Alertas personalizadas ============ */
+function copyAlert() {
+    let bg = document.getElementById("bg");
+    bg.insertAdjacentHTML('beforeend', `
+    <span id="copy-alert" class="copy-alert">Texto Copiado</span>
+    `);
+
+    setTimeout(() => bg.removeChild(bg.lastChild), 1500);
+}
+
+function customAlert(width, backgroundColor, textColor, title, message, acceptBtn) {
+    let bg = document.getElementById("bg");
+    bg.insertAdjacentHTML('beforeend', '<div id="custom-alert" class="custom-alert"><div>');
+
+    /* Dando estilo al fondo de la alerta */
+    let alertBackground = document.getElementById("custom-alert");
+    alertBackground.style.zIndex = '10';
+    alertBackground.style.position = 'absolute';
+    alertBackground.style.margin = 'auto auto';
+    alertBackground.style.top = '0';
+    alertBackground.style.bottom = '0';
+    alertBackground.style.left = '0';
+    alertBackground.style.right = '0';
+    alertBackground.style.width = width + '%';
+    alertBackground.style.height = 'fit-content';
+    alertBackground.style.backgroundColor = backgroundColor;
+    alertBackground.style.color = textColor;
+    alertBackground.style.textAlign = 'center';
+    alertBackground.style.padding = '2rem';
+    alertBackground.style.borderRadius = '24px';
+    alertBackground.style.boxShadow = '0 24px 32px -8px rgba(0, 0, 0, 0.5)';
+
+    /* Titulo */
+    alertBackground.insertAdjacentHTML('beforeend', '<h1 id="title">' + title + '</h1>');
+    let titleH1 = document.getElementById('title');
+    titleH1.style.fontSize = '1.5rem';
+    titleH1.style.lineHeight = '120%';
+
+    /* Mensaje */
+    alertBackground.insertAdjacentHTML('beforeend', '<p id="message">' + message + '</p>');
+    let messageP = document.getElementById("message");
+    messageP.style.lineHeight = '120%';
+    messageP.style.margin = '1rem 0';
+
+    /* Botón */
+    if(acceptBtn) {
+        alertBackground.insertAdjacentHTML("beforeend", '<button id="acceptBtn" class="btn" onclick="closeAlert()">Aceptar</button>');
+        let btnAccept = document.getElementById("acceptBtn");
+        btnAccept.style.width = '50%';
+    }
+
+    /* Desabilitando elementos */
+    let main = document.querySelector("main");
+    let footer = document.querySelector("footer");
+    main.style.pointerEvents = 'none';
+    footer.style.pointerEvents = 'none';
+}
+
+function closeAlert() {
+    let alert = document.getElementById("custom-alert");
+    let alertParent = document.getElementById("bg");
+    let main = document.querySelector("main");
+    let footer = document.querySelector("footer");
+
+    /* Eliminamos alerta del elemento padre */
+    alertParent.removeChild(alert);
+
+    /* Habilitamos los elementos principales */
+    main.style.pointerEvents = 'auto';
+    footer.style.pointerEvents = 'auto';
+
 }
 
 
 /* ============ Funciones para el background ============ */
 function showStars() {
+    let body = document.getElementById("body");
+    let height = window.innerHeight;
+    console.log(height);
 
+    /* Creamos un lienzo para el fondo */
+    body.insertAdjacentHTML('beforeend', '<div id="bg"></div>');
     let bg = document.getElementById("bg");
- 
+
     /* Creamos estrellas random cada 700ms */
     setInterval(() => {
         /* Posición y tamaño random */
-        let x = Math.round(Math.random() * (90 - 10) + 10);
-        let y = Math.round(Math.random() * (90 - 10) + 10);
+        let x = Math.round(Math.random()*100);
+        let y = Math.round(Math.random()*10);
         let size = Math.round(Math.random() * (3 - 1) + 1);
+        let duration = Math.round(Math.random()*(100 - 50) + 50);
+        let starsArray = document.getElementsByClassName("star");
 
         /* Agregamos las estrellas con los estilos random */
-        bg.insertAdjacentHTML('beforeend',
-            `<span id="star" class="star" style="
-                top: ` + y + `%; 
-                left: ` + x + `%; 
-                width: ` + size + `px; 
-                height: ` + size + `px;">
-            </span>`);
-        
-        /* Eliminamos las estrellas después de 50s */
-        setTimeout(() => bg.removeChild(bg.firstChild), 50000);
+        if(starsArray.length < 100) {
+            bg.insertAdjacentHTML('beforeend',
+                `<span id="star" class="star" style="
+                    top: ` + y + `%; 
+                    left: ` + x + `%; 
+                    width: ` + size + `px; 
+                    height: ` + size + `px;
+                    animation-duration: ` + duration + `s;">
+                </span>`);
+        }
+
+        /* Eliminamos las estrellas que lleguen hasta abajo */
+        for(let i = 0; i < starsArray.length; i++) {
+            if(starsArray[i].offsetTop > height) {
+                bg.removeChild(starsArray[i]);
+            }
+        }
+   
     }, 700);
 }
