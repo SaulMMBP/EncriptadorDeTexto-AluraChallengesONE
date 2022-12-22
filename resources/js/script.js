@@ -48,7 +48,7 @@ function mostrarEncriptado() {
         /* Agregamos la frase encriptada al elemento html */
         document.getElementById("output").value = encriptar(frase);
     } else {
-        customAlert(30, 'none', 'white', 'Entrada incorrecta', 'Parece que su mensaje esté vacío o tal vez contiene mayúsculas y/o acentos, evítelos por favor.', true);
+        customAlert('Entrada incorrecta', 'Parece que su mensaje esté vacío o tal vez contiene mayúsculas y/o acentos, evítelos por favor.', true);
     }
 }
 
@@ -63,7 +63,7 @@ function mostrarDesencriptado() {
         /* Agregamos la frase desencriptada al elemento html */
         document.getElementById("output").value = desencriptar(frase);
     } else {
-        customAlert(30, 'none', 'white', 'Entrada incorrecta', 'Parece que su mensaje esté vacío o tal vez contiene mayúsculas y/o acentos, evítelos por favor.', true);
+        customAlert('Entrada incorrecta', 'Parece que su mensaje esté vacío o tal vez contiene mayúsculas y/o acentos, evítelos por favor.', true);
     }
 }
 
@@ -96,27 +96,13 @@ function copyAlert() {
     setTimeout(() => bg.removeChild(bg.lastChild), 1500);
 }
 
-function customAlert(width, backgroundColor, textColor, title, message, acceptBtn) {
+function customAlert(title, message, acceptBtn) {
     let bg = document.getElementById("bg");
     bg.insertAdjacentHTML('beforeend', '<div id="custom-alert" class="custom-alert"><div>');
 
-    /* Dando estilo al fondo de la alerta */
+    /* Creando fondo de la alerta */
     let alertBackground = document.getElementById("custom-alert");
-    alertBackground.style.zIndex = '10';
-    alertBackground.style.position = 'absolute';
-    alertBackground.style.margin = 'auto auto';
-    alertBackground.style.top = '0';
-    alertBackground.style.bottom = '0';
-    alertBackground.style.left = '0';
-    alertBackground.style.right = '0';
-    alertBackground.style.width = width + '%';
-    alertBackground.style.height = 'fit-content';
-    alertBackground.style.backgroundColor = backgroundColor;
-    alertBackground.style.color = textColor;
-    alertBackground.style.textAlign = 'center';
-    alertBackground.style.padding = '2rem';
-    alertBackground.style.borderRadius = '24px';
-    alertBackground.style.boxShadow = '0 24px 32px -8px rgba(0, 0, 0, 0.5)';
+
 
     /* Titulo */
     alertBackground.insertAdjacentHTML('beforeend', '<h1 id="title">' + title + '</h1>');
