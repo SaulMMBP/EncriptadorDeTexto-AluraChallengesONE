@@ -25,6 +25,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     gap: 2rem;
+    overflow: hidden;
 
     background: radial-gradient(ellipse at bottom, var(--color-dark) 0%, var(--color-more-dark) 100%)
 }
@@ -89,7 +90,7 @@ header h1 {
 main {
     display: flex;
     justify-content: space-between;
-    height: 84%;
+    height: 82%;
     gap: 1rem;
 }
 
@@ -109,7 +110,7 @@ textarea {
     border: none;
     background: none;
     outline: none;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--color-text);
 }
 
@@ -214,6 +215,10 @@ footer {
 /* ==== Tablet responsive ==== */
 
 @media screen and (max-width: 940px) {
+    header h1 {
+        width: 5%;
+    }
+    
     main {
         flex-direction: column;
     }
@@ -243,10 +248,6 @@ footer {
 
     body {
         padding: 0 1rem;
-    }
-
-    header h1 {
-        width: 5%;
     }
 
     .input-section .buttons {
