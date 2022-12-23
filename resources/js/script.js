@@ -2,7 +2,7 @@
 function prepareSpace(frase) {
     /* Insertamos textarea con el mensaje encriptado/desencriptado y boton de copiar */
     document.getElementById("view-section").innerHTML = `
-        <textarea id="output" class="output" readonly></textarea>
+        <textarea id="output" class="output" rows="8" readonly></textarea>
         <button class="btn" onclick="copiar()">Copiar</button>
     `;
 }
@@ -93,7 +93,7 @@ function copyAlert() {
     <span id="copy-alert" class="copy-alert">Texto Copiado</span>
     `);
 
-    setTimeout(() => bg.removeChild(bg.lastChild), 1500);
+    setTimeout(() => bg.removeChild(document.getElementById("copy-alert")), 3000);
 }
 
 function customAlert(title, message, acceptBtn) {
