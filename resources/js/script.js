@@ -178,7 +178,7 @@ function showStars() {
 
         /* Eliminamos las estrellas que lleguen hasta abajo */
         for(let i = 0; i < starsArray.length; i++) {
-            if(starsArray[i].offsetTop > height) {
+            if(starsArray[i].offsetTop > (height - 50)) {
                 bg.removeChild(starsArray[i]);
             }
         }
